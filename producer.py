@@ -1,9 +1,12 @@
 from allsecrets import *
+from titles import *
+from coordinates import *
 import json
 import requests
 from json import dumps, loads
 # dumps converts python object to json string
 # loads converts json string to python object
+
 
 from kafka import KafkaProducer
 
@@ -14,21 +17,23 @@ spark = SparkSession.builder.appName('OMDB')\
     .getOrCreate()
 
 
-# http://www.omdbapi.com/?i=tt3896198&apikey=******* # api key for    OMBD API
-
-parameters = {'t': 'top gun maverick', "apikey": ombd_api}
-OMDB_response = requests.get("http://www.omdbapi.com/", params=parameters)
-
-
 # zookeeper and kafka broker should be running in the background
 producer = KafkaProducer(bootstrap_servers=[
                          'localhost:9092'], value_serializer=lambda x: dumps(x).encode('utf-8'))
 # value_serializer=lambda x: dumps(x).encode('utf-8') is used to convert the data into json format
 
-# send the OMDB_response to the topic named OMDB
-producer.send('OMDB', value=OMDB_response.json())
+# http://www.omdbapi.com/?i=tt3896198&apikey=******* # api key for    OMBD API
+for title in titles:
+    parameters = {'t': title, "apikey": ombd_api}
+    OMDB_response = requests.get(
+        "http://www.omdbapi.com/", params=parameters)
+    producer.send('OMDB', value=OMDB_response.json())
+    producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
 
 
-# flush the messages to the topic
-# flush() is a blocking function which ensures all the messages are sent to the topic
-producer.flush()
+# for lat, lon in lat_lon.items():
+#     parameters = {'lat': lat, "lon": lon, "appid": open_weather_api}
+#     weather_response = requests.get(
+#         "http://api.openweathermap.org/data/2.5/forecast", params=parameters)
+#     producer.send('weather', value=weather_response.json())
+#     producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
