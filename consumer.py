@@ -9,43 +9,9 @@ from kafka import KafkaConsumer
 
 from pyspark.sql import SparkSession, functions as F
 
-spark = SparkSession.builder.appName('OMDB+weather')\
+spark = SparkSession.builder.appName('weather')\
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.1")\
     .getOrCreate()
-
-
-# consumer_OMDB = KafkaConsumer('OMDB', bootstrap_servers=['localhost:9092'], auto_offset_reset='earliest',
-#                               enable_auto_commit=True, value_deserializer=lambda x: loads(x.decode('utf-8')))
-
-
-# # Reading from Kafka
-# df_OMDB = spark \
-#     .readStream \
-#     .format("kafka") \
-#     .option("kafka.bootstrap.servers", "localhost:9092") \
-#     .option("subscribe", "OMDB") \
-#     .option("startingOffsets", "earliest") \
-#     .load()
-
-# # # Converting the value column from binary to string inroder to read the data
-# df_OMDB = df_OMDB.selectExpr("CAST(value AS STRING)")
-
-
-# schema_OMDB = "Actors STRING, Awards STRING, BoxOffice STRING, Country STRING, DVD STRING, Director STRING, Genre STRING, Language STRING, Metascore STRING, Plot STRING, Poster STRING, Production STRING, Rated STRING, Ratings STRING, Released STRING, Response STRING, Runtime STRING, Title STRING, Type STRING, Website STRING, Writer STRING, Year STRING, imdbID STRING, imdbRating STRING, imdbVotes STRING"
-
-# # explode to columns from json
-# df_OMDB = df_OMDB.select(F.from_json(F.col("value"), schema_OMDB).alias(
-#     "data")).select("data.*")
-
-
-# # Writing the stream to the console
-# query = df_OMDB \
-#     .writeStream \
-#     .outputMode("append") \
-#     .format("console") \
-#     .start()
-
-# query.awaitTermination()
 
 
 Consumer = KafkaConsumer('weather', bootstrap_servers=['localhost:9092'], auto_offset_reset='earliest',
@@ -61,24 +27,52 @@ df_weather = spark \
     .option("startingOffsets", "earliest") \
     .load()
 
-df_weather.printSchema()
 
 # # Converting the value column from binary to string inroder to read the data
 df_weather = df_weather.selectExpr("CAST(value AS STRING)")
 
 
-schema_weather = "city STRING, cod STRING, message STRING, cnt STRING, list STRING"
+#  load  schema_weather  from .json file
+with open('schema_weather.json', 'r') as f:
+    schema_weather = F.StructType.fromJson(json.load(f))
 
-# auto infer schema
-
-
+# select all columns from data column and create a new dataframe
 df_weather = df_weather.select(F.from_json(
     F.col("value"), schema_weather).alias("data")).select("data.*")
 
-df_weather.printSchema()
+# df_weather.printSchema()
 
-# # # explode city column to columns
-# df_weather = df_weather.select(F.explode(F.col("city")).alias("city"))
+# expanding the  city  column
+df_weather = df_weather.select("*", F.col("city.*"))
+# df_weather.printSchema()
+
+# explode list colmun
+df_weather = df_weather.select(
+    "*", F.explode("list").alias(" every 3 hours weather"))
+# df_weather.printSchema()
+
+
+# # extract coord, country, id, name, population, sunrise, sunset, timezone from city column
+# df_weather = df_weather.select( F.col("city.coord.lat").alias("lat"), F.col("city.coord.lon").alias("lon"), F.col("city.country").alias("country"), F.col("city.id").alias("id"), F.col("city.name").alias("name"), F.col("city.population").alias("population"), F.col("city.sunrise").alias("sunrise"), F.col("city.sunset").alias("sunset"), F.col("city.timezone").alias("timezone"), F.col("every 3 hours weather.*"))
+
+
+# #  with the help of schema_weather we can extract the data from the json file
+# df_weather = df_weather.select(F.col("city.coord.lat"), F.col("city.coord.lon"), F.col("city.country"), F.col("city.id"), F.col(
+#     "city.name"), F.col("city.population"), F.col("city.sunrise"), F.col("city.sunset"), F.col("city.timezone"), F.col("list"))
+
+# # df_weather.printSchema()
+
+
+# # explode list column
+# df_weather = df_weather.select(
+#     "*", F.explode("list").alias("every 3 hours weather"))
+
+# # df_weather.printSchema()
+
+# # expand every 3 hours weather column
+# df_weather = df_weather.select(F.col("lat"), F.col("lon"), F.col("country"), F.col("id"), F.col("name"), F.col(
+#     "population"), F.col("sunrise"), F.col("sunset"), F.col("timezone"), F.col("every 3 hours weather.*"))
+
 # df_weather.printSchema()
 
 

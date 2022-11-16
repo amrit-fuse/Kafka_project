@@ -12,7 +12,7 @@ from kafka import KafkaProducer
 
 from pyspark.sql import SparkSession, functions as F
 
-spark = SparkSession.builder.appName('OMDB')\
+spark = SparkSession.builder.appName('weather')\
     .config("spark.jars.packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2")\
     .getOrCreate()
 
@@ -30,7 +30,6 @@ producer = KafkaProducer(bootstrap_servers=[
 
 #     # producer.send('weather', value=weather_response.json())
 #     # producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
-
 
 
 for lat, lon in lat_lon.items():
