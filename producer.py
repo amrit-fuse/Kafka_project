@@ -19,21 +19,24 @@ spark = SparkSession.builder.appName('OMDB')\
 
 # zookeeper and kafka broker should be running in the background
 producer = KafkaProducer(bootstrap_servers=[
-                         'localhost:9092'], value_serializer=lambda x: dumps(x).encode('utf-8'))
+                         'localhost:9092'], value_serializer=lambda x: dumps(x).encode('utf-8'), key_serializer=lambda x: dumps(x).encode('utf-8'))
 # value_serializer=lambda x: dumps(x).encode('utf-8') is used to convert the data into json format
-
-# http://www.omdbapi.com/?i=tt3896198&apikey=******* # api key for    OMBD API
-for title in titles:
-    parameters = {'t': title, "apikey": ombd_api}
-    OMDB_response = requests.get(
-        "http://www.omdbapi.com/", params=parameters)
-    producer.send('OMDB', value=OMDB_response.json())
-    producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
 
 
 # for lat, lon in lat_lon.items():
 #     parameters = {'lat': lat, "lon": lon, "appid": open_weather_api}
 #     weather_response = requests.get(
 #         "http://api.openweathermap.org/data/2.5/forecast", params=parameters)
-#     producer.send('weather', value=weather_response.json())
-#     producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
+
+#     # producer.send('weather', value=weather_response.json())
+#     # producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
+
+
+
+for lat, lon in lat_lon.items():
+    parameters = {'lat': lat, "lon": lon, "appid": open_weather_api}
+    weather_response = requests.get(
+        "http://api.openweathermap.org/data/2.5/forecast", params=parameters)
+
+    producer.send('weather', value=weather_response.json())
+producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
