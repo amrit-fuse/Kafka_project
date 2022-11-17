@@ -44,62 +44,62 @@ with open('schema_weather.json', 'r') as f:
 df_weather = df_weather.select(F.from_json(
     F.col("value"), schema_weather).alias("data")).select("data.*")
 
-df_weather.printSchema()
-
-# # expanding the  city  column  and drop city column
-# df_weather = df_weather.select("*", F.col("city.*")) \
-#     .drop("city")
-# # df_weather.printSchema()
-
-# # for lat lon
-# df_weather = df_weather.select("*", F.col("coord.*")) \
-#     .drop("coord")
-
-# # explode list colmun  and drop list column
-# df_weather = df_weather.select(
-#     "*", F.explode("list").alias("every_3_hr")) \
-#     .drop("list")
-
-# # for every_3_hr column
-# df_weather = df_weather.select("*", F.col("every_3_hr.*")) \
-#     .drop("every_3_hr")
-
-# # for clouds column
-# df_weather = df_weather.select("*", F.col("clouds.*")) \
-#     .drop("clouds")
-
-# # rename all column to Cloudiness
-# df_weather = df_weather.withColumnRenamed("all", "Cloudiness")
-
-# # for main column
-# df_weather = df_weather.select("*", F.col("main.*")) \
-#     .drop("main")
-
-# # for  rain column
-# df_weather = df_weather.select("*", F.col("rain.*")) \
-#     .drop("rain")
-
-# # for sys column
-# df_weather = df_weather.select("*", F.col("sys.*")) \
-#     .drop("sys")
-
-# #   "weather": [
-# #     {
-# #         "description": "scattered clouds",
-# #         "icon": "03n",
-# #         "id": 802,
-# #         "main": "Clouds"
-# #     }
-# # ],
-# # for weather column
-# df_weather = df_weather.select("*", F.col("weather[0].*")) \
-#     .drop("weather")
-
-# # for wind column
-# df_weather = df_weather.select("*", F.col("wind.*")) \
-#     .drop("wind")
-
 # df_weather.printSchema()
+
+# expanding the  city  column  and drop city column
+df_weather = df_weather.select("*", F.col("city.*")) \
+    .drop("city")
+# df_weather.printSchema()
+
+# for lat lon
+df_weather = df_weather.select("*", F.col("coord.*")) \
+    .drop("coord")
+
+# explode list colmun  and drop list column
+df_weather = df_weather.select(
+    "*", F.explode("list").alias("every_3_hr")) \
+    .drop("list")
+
+# for every_3_hr column
+df_weather = df_weather.select("*", F.col("every_3_hr.*")) \
+    .drop("every_3_hr")
+
+# for clouds column
+df_weather = df_weather.select("*", F.col("clouds.*")) \
+    .drop("clouds")
+
+# rename all column to Cloudiness
+df_weather = df_weather.withColumnRenamed("all", "Cloudiness")
+
+# for main column
+df_weather = df_weather.select("*", F.col("main.*")) \
+    .drop("main")
+
+# for  rain column
+df_weather = df_weather.select("*", F.col("rain.*")) \
+    .drop("rain")
+
+# for sys column
+df_weather = df_weather.select("*", F.col("sys.*")) \
+    .drop("sys")
+
+#   "weather": [
+#     {
+#         "description": "scattered clouds",
+#         "icon": "03n",
+#         "id": 802,
+#         "main": "Clouds"
+#     }
+# ],
+# for weather column
+df_weather = df_weather.select("*", F.col("weather[0].*")) \
+    .drop("weather")
+
+# for wind column
+df_weather = df_weather.select("*", F.col("wind.*")) \
+    .drop("wind")
+
+df_weather.printSchema()
 
 #################### NOT working for streaming data ############################
 # for loop to expand  every nested column elements  and drop the nested column
