@@ -2,310 +2,146 @@
     "type": "struct",
     "fields": [
         {
-            "name": "city",
-            "type": {
-                "type": "struct",
-                "fields": [
-                    {
-                        "name": "coord",
-                        "type": {
-                            "type": "struct",
-                            "fields": [
-                                {
-                                    "name": "lat",
-                                    "type": "double",
-                                    "nullable": true,
-                                    "metadata": {}
-                                },
-                                {
-                                    "name": "lon",
-                                    "type": "double",
-                                    "nullable": true,
-                                    "metadata": {}
-                                }
-                            ]
-                        },
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "country",
-                        "type": "string",
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "id",
-                        "type": "long",
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "name",
-                        "type": "string",
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "population",
-                        "type": "long",
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "sunrise",
-                        "type": "long",
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "sunset",
-                        "type": "long",
-                        "nullable": true,
-                        "metadata": {}
-                    },
-                    {
-                        "name": "timezone",
-                        "type": "long",
-                        "nullable": true,
-                        "metadata": {}
-                    }
-                ]
-            },
-            "nullable": true,
-            "metadata": {}
-        },
-        {
-            "name": "cnt",
-            "type": "long",
-            "nullable": true,
-            "metadata": {}
-        },
-        {
-            "name": "cod",
+            "name": "name",
             "type": "string",
             "nullable": true,
             "metadata": {}
         },
         {
-            "name": "list",
-            "type": {
-                "type": "array",
-                "elementType": {
-                    "type": "struct",
-                    "fields": [
-                        {
-                            "name": "clouds",
-                            "type": {
-                                "type": "struct",
-                                "fields": [
-                                    {
-                                        "name": "all",
-                                        "type": "long",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    }
-                                ]
-                            },
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "dt",
-                            "type": "long",
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "dt_txt",
-                            "type": "string",
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "main",
-                            "type": {
-                                "type": "struct",
-                                "fields": [
-                                    {
-                                        "name": "feels_like",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "grnd_level",
-                                        "type": "long",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "humidity",
-                                        "type": "long",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "pressure",
-                                        "type": "long",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "sea_level",
-                                        "type": "long",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "temp",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "temp_kf",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "temp_max",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "temp_min",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    }
-                                ]
-                            },
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "pop",
-                            "type": "double",
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "rain",
-                            "type": {
-                                "type": "struct",
-                                "fields": [
-                                    {
-                                        "name": "3h",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    }
-                                ]
-                            },
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "sys",
-                            "type": {
-                                "type": "struct",
-                                "fields": [
-                                    {
-                                        "name": "pod",
-                                        "type": "string",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    }
-                                ]
-                            },
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "visibility",
-                            "type": "long",
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "weather",
-                            "type": {
-                                "type": "array",
-                                "elementType": {
-                                    "type": "struct",
-                                    "fields": [
-                                        {
-                                            "name": "description",
-                                            "type": "string",
-                                            "nullable": true,
-                                            "metadata": {}
-                                        },
-                                        {
-                                            "name": "icon",
-                                            "type": "string",
-                                            "nullable": true,
-                                            "metadata": {}
-                                        },
-                                        {
-                                            "name": "id",
-                                            "type": "long",
-                                            "nullable": true,
-                                            "metadata": {}
-                                        },
-                                        {
-                                            "name": "main",
-                                            "type": "string",
-                                            "nullable": true,
-                                            "metadata": {}
-                                        }
-                                    ]
-                                },
-                                "containsNull": true
-                            },
-                            "nullable": true,
-                            "metadata": {}
-                        },
-                        {
-                            "name": "wind",
-                            "type": {
-                                "type": "struct",
-                                "fields": [
-                                    {
-                                        "name": "deg",
-                                        "type": "long",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "gust",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    },
-                                    {
-                                        "name": "speed",
-                                        "type": "double",
-                                        "nullable": true,
-                                        "metadata": {}
-                                    }
-                                ]
-                            },
-                            "nullable": true,
-                            "metadata": {}
-                        }
-                    ]
-                },
-                "containsNull": true
-            },
+            "name": "sunrise",
+            "type": "string",
             "nullable": true,
             "metadata": {}
         },
         {
-            "name": "message",
+            "name": "sunset",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "dt",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "dt_txt",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "pop",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "visibility",
             "type": "long",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "lat",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "lon",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "cloudiness",
+            "type": "long",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "feels_like",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "grnd_level",
+            "type": "long",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "humidity",
+            "type": "long",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "sea_level",
+            "type": "long",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "temp",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "temp_kf",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "temp_max",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "temp_min",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "pod",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "deg",
+            "type": "long",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "gust",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "speed",
+            "type": "double",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "description",
+            "type": "string",
+            "nullable": true,
+            "metadata": {}
+        },
+        {
+            "name": "main",
+            "type": "string",
             "nullable": true,
             "metadata": {}
         }
