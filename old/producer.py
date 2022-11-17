@@ -38,4 +38,4 @@ for lat, lon in lat_lon.items():
         "http://api.openweathermap.org/data/2.5/forecast", params=parameters)
 
     producer.send('weather1', value=weather_response.json())
-    producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
+producer.flush()  # flush the data to the kafka broker ( topic) and  make sure data  is sent to the kafka broker and  not lost in the buffer
