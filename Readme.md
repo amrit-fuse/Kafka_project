@@ -1,6 +1,6 @@
 # Apache kafka project
 
-This is a sole project including topic like confluent kafka, pyspark and postgresql.
+This is a sole project done during my trainee in Fusemachines Nepla. This project includes topics like confluent kafka, pyspark and postgresql 
 
 ## Create and activate a virtual environment:
 
@@ -21,14 +21,14 @@ Use `pip install -r requirements.txt` to install the required packages.
 ## Workflow
 ![workflow](/Assets/workflow.png)
 
-|**Folders/Files**|**Description**|
-|---|---|
-|**Assets**|Contains the images used in the README.md file|
-|**.gitignore**|Contains the files and folders to be ignored by git|
-|**connec_topic_list_delete.ipynb**|Contains code to list and delete connectors and topics|
-|**consumer_dump.json**|json file containg response of API |
-|**coordinates.py**|contains cooordinates in lat:long dictionary format|
-|**main_file.ipynb**|contains code for whole project|
-|**README.md**|Contains the project description|
-|**requirements.txt**|Contains the required packages to run the project|
-|**schemas.py**|Contains all manually created schemas for each questions|
+| **Folders/Files**                  | **Description**                                          |
+| ---------------------------------- | -------------------------------------------------------- |
+| **Assets**                         | Contains the images used in the README.md file           |
+| **.gitignore**                     | Contains the files and folders to be ignored by git      |
+| **connec_topic_list_delete.ipynb** | Contains code to list and delete connectors and topics   |
+| **consumer_dump.json**             | json file containg response of API                       |
+| **coordinates.py**                 | contains cooordinates in lat:long dictionary format      |
+| **main_file.ipynb**                | contains code for whole project                          |
+| **README.md**                      | Contains the project description                         |
+| **requirements.txt**               | Contains the required packages to run the project        |
+| **schemas.py**                     | Contains all manually created schemas for each questions |
