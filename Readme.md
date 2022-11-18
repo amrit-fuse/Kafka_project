@@ -1,6 +1,6 @@
 # Apache kafka project
 
-This is a sole project done during my trainee in Fusemachines Nepla. This project includes topics like confluent kafka, pyspark and postgresql 
+This is a sole project done during my traineeship at Fusemachines Nepal. This project includes topics like confluent kafka, pyspark and postgresql 
 
 ## Create and activate a virtual environment:
 
