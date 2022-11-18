@@ -18,3 +18,9 @@ Use `pip install -r requirements.txt` to install the required packages.
  api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 
+## Workflow
+![workflow](/Assets/workflow.png)
+
+
+
+
